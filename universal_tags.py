@@ -27,10 +27,10 @@ X - other: foreign words, typos, abbreviations
 from __future__ import print_function, unicode_literals, division
 from future_builtins import map, filter
 
-import re, glob
+import re, glob, cPickle
 from collections import defaultdict
 
-MAP_DIR = 'universal_pos_tags.1.01'
+MAP_DIR = '.'
 
 COARSE_TAGS = ('VERB','NOUN','PRON','ADJ','ADV','ADP','CONJ','DET','NUM','PRT','X','.')
 
@@ -89,6 +89,17 @@ def convert(fileid, originalTag):
     '''
     return mapping(fileid)[originalTag]
 
+def mapping_to_pickle(fileid, pickle_path):
+    '''
+    Persist the mapping from fileid to a pickle
+
+    >>> universal_tags.mapping_to_pickle('en-ptb','en-ptb.pickle') 
+    Saved into en-ptb.pickle
+    ''' 
+
+    with open(pickle_path, 'w') as f:
+        cPickle.dump(mapping(fileid),f)
+    print("Saved into {}".format(pickle_path))
 
 def test():
     for fileid in fileids():

@@ -21,16 +21,23 @@ X - other: foreign words, typos, abbreviations
 
 @author: Nathan Schneider (nschneid)
 @since: 2011-05-06
+
+Modified by Oscar Araque @ 30 Nov 2015
 '''
 
-# Strive towards Python 3 compatibility
-from __future__ import print_function, unicode_literals, division
-from future_builtins import map, filter
+# Uncomment if using python 2
+# from __future__ import print_function, unicode_literals, division
+# from future_builtins import map, filter
 
-import re, glob, cPickle
+import re, glob
 from collections import defaultdict
 
-MAP_DIR = '.'
+try:
+    import cPickle as pickle
+except:
+    import pickle
+
+MAP_DIR = 'maps/.'
 
 COARSE_TAGS = ('VERB','NOUN','PRON','ADJ','ADV','ADP','CONJ','DET','NUM','PRT','X','.')
 
